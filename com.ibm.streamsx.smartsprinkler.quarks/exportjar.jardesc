@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="/Users/chanskw/cupcake/app.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/com.ibm.streamsx.smartsprinkler.quarks/exportjar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" mainClassHandleIdentifier="=com.ibm.streamsx.smartsprinkler.quarks/src&lt;com.ibm.streamsx.smartsprinkler.quarks{SmartSprinklerApp.java[SmartSprinklerApp" manifestLocation="" manifestVersion="1.0" reuseManifest="false" saveManifest="false" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <folder path="/com.ibm.streamsx.smartsprinkler.quarks/libs"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/build.xml"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/exportjar.jardesc"/>
+        <javaElement handleIdentifier="=com.ibm.streamsx.smartsprinkler.quarks/src"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/.classpath"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/.gitignore"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/device.cfg"/>
+        <file path="/com.ibm.streamsx.smartsprinkler.quarks/.project"/>
+    </selectedElements>
+</jardesc>

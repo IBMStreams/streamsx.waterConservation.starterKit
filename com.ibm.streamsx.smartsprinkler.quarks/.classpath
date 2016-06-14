@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/junit.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-core.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-device.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="lib" path="/opt/pi4j/lib/pi4j-service.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.execution.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.function.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.graph.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.oplet.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.topology.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.api.window.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.providers.development.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.providers.direct.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.runtime.etiao.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.runtime.jmxcontrol.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.runtime.jsoncontrol.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.spi.graph.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/lib/quarks.spi.topology.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/connectors/common/lib/quarks.connectors.common.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/connectors/iot/lib/quarks.connectors.iot.jar"/>
+	<classpathentry kind="lib" path="/opt/quarks/java8/connectors/iotf/lib/quarks.connectors.iotf.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

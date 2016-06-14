@@ -1,0 +1,25 @@
+applications:
+- name: waterconservation
+  services:
+  - Insights-for-Weather
+  - Streaming-Analytics
+  - Internet-of-Things-Platform
+  disk_quota: 1024M
+  buildpack: sdk-for-nodejs
+  description: The Water Conservation App
+  domain: mybluemix.net
+  path: nodejs
+  command: npm start
+  instances: 1
+  memory: 512M
+
+declared-services:
+  Insights-for-Weather:
+    label: weatherinsights
+    plan: Free
+  Streaming-Analytics:
+    label: streaming-analytics
+    plan: Standard
+  Internet-of-Things-Platform:
+    label: iotf-service
+    plan: iotf-service-free

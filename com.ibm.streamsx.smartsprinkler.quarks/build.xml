@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- WARNING: Eclipse auto-generated file.
+              Any modifications will be overwritten.
+              To include a user specific buildfile here, simply create one in the same
+              directory with the processing instruction <?eclipse.ant.import?>
+              as the first entry and export the buildfile again. --><project basedir="." default="build" name="com.ibm.streamsx.smartsprinkler.quarks">
+    <property environment="env"/>
+    <property name="ECLIPSE_HOME" value="../../../../../Applications/Eclipse.app/Contents/Eclipse/"/>
+    <property name="debuglevel" value="source,lines,vars"/>
+    <property name="target" value="1.8"/>
+    <property name="source" value="1.8"/>
+    <path id="com.ibm.streamsx.smartsprinkler.quarks.classpath">
+        <pathelement location="bin"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.execution.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.function.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.graph.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.oplet.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.topology.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.api.window.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.providers.development.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.providers.direct.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.runtime.etiao.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.runtime.jmxcontrol.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.runtime.jsoncontrol.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.spi.graph.jar"/>
+        <pathelement location="/opt/quarks/java8/lib/quarks.spi.topology.jar"/>
+        <pathelement location="/opt/quarks//java8/connectors/common/lib/quarks.connectors.common.jar"/>
+        <pathelement location="/opt/quarks//java8/connectors/iot/lib/quarks.connectors.iot.jar"/>
+        <pathelement location="/opt/quarks//java8/connectors/iotf/lib/quarks.connectors.iotf.jar"/>
+        <pathelement location="/opt/pi4j/lib/pi4j-core.jar"/>
+        <pathelement location="/opt/pi4j/lib/pi4j-device.jar"/>
+        <pathelement location="/opt/pi4j/lib/pi4j-gpio-extension.jar"/>
+        <pathelement location="/opt/pi4j/lib/pi4j-service.jar"/>
+    </path>
+    <target name="init">
+        <mkdir dir="bin"/>
+        <copy includeemptydirs="false" todir="bin">
+            <fileset dir="src">
+                <exclude name="**/*.launch"/>
+                <exclude name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="clean">
+        <delete dir="bin"/>
+    </target>
+    <target depends="clean" name="cleanall"/>
+    <target depends="build-subprojects,build-project" name="build"/>
+    <target name="build-subprojects"/>
+    <target depends="init" name="build-project">
+        <echo message="${ant.project.name}: ${ant.file}"/>
+        <javac debug="true" debuglevel="${debuglevel}" destdir="bin" includeantruntime="false" source="${source}" target="${target}">
+            <src path="src"/>
+            <classpath refid="com.ibm.streamsx.smartsprinkler.quarks.classpath"/>
+        </javac>
+    </target>
+    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>
+    <target description="copy Eclipse compiler jars to ant lib directory" name="init-eclipse-compiler">
+        <copy todir="${ant.library.dir}">
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </copy>
+        <unzip dest="${ant.library.dir}">
+            <patternset includes="jdtCompilerAdapter.jar"/>
+            <fileset dir="${ECLIPSE_HOME}/plugins" includes="org.eclipse.jdt.core_*.jar"/>
+        </unzip>
+    </target>
+    <target description="compile project with Eclipse compiler" name="build-eclipse-compiler">
+        <property name="build.compiler" value="org.eclipse.jdt.core.JDTCompilerAdapter"/>
+        <antcall target="build"/>
+    </target>
+    <target name="PostReading">
+        <java classname="com.ibm.streamsx.smartsprinkler.quarks.PostReading" failonerror="true" fork="yes">
+            <classpath refid="com.ibm.streamsx.smartsprinkler.quarks.classpath"/>
+        </java>
+    </target>
+    <target name="SmartSprinklerApp">
+        <java classname="com.ibm.streamsx.smartsprinkler.quarks.SmartSprinklerApp" failonerror="true" fork="yes">
+            <classpath refid="com.ibm.streamsx.smartsprinkler.quarks.classpath"/>
+        </java>
+    </target>
+</project>

@@ -1,0 +1,13 @@
+// begin_generated_IBM_copyright_prolog                             
+//                                                                  
+// This is an automatically generated copyright prolog.             
+// After initializing,  DO NOT MODIFY OR MOVE                       
+// **************************************************************** 
+// (C) Copyright IBM Corp.  2016, 2016                              
+// All Rights Reserved.                                             
+// **************************************************************** 
+// end_generated_IBM_copyright_prolog                               
+namespace com.ibm.streamsx.smartsprinkler.iot;
+
+type SensorReading = rstring id, float64 latitude, float64 longitude, float64 soilMoisture ;
+type CommandInfo = rstring id, boolean approval, rstring reason ;
