@@ -109,4 +109,4 @@ The components required by the Node.js app are documented in the [package.json](
 
 # License
 
-The source code for the app is available under the Apache license, which is found in [LICENSE.md](LICENSE.md) in the root of this repository.
+The source code for the app is available under the Apache license, which is found in [LICENSE](LICENSE) in the root of this repository.
