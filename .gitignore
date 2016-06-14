@@ -1,0 +1,11 @@
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+.DS_Store
+.idea

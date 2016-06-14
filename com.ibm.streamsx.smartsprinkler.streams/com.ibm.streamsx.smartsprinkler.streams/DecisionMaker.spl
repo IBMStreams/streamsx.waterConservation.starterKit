@@ -1,0 +1,228 @@
+// begin_generated_IBM_copyright_prolog                             
+//                                                                  
+// This is an automatically generated copyright prolog.             
+// After initializing,  DO NOT MODIFY OR MOVE                       
+// **************************************************************** 
+// (C) Copyright IBM Corp.  2016, 2016                              
+// All Rights Reserved.                                             
+// **************************************************************** 
+// end_generated_IBM_copyright_prolog                               
+namespace com.ibm.streamsx.smartsprinkler.streams;
+
+use com.ibm.streamsx.weather::* ;
+use com.ibm.streamsx.json::JSONToTuple ;
+use com.ibm.streamsx.json::TupleToJSON ;
+use com.ibm.streamsx.inet.http::HTTPPost ;
+use com.ibm.streamsx.iot::* ;
+
+composite DecisionMaker {
+    type
+		DecisionType = rstring id, boolean approval, rstring reason, float64 qpf ;
+		SensorReading = rstring id, float64 latitude, float64 longitude,
+			float64 soilMoisture ;
+		CommandInfo = rstring id, boolean approval, rstring reason ;
+		DemoDataType = rstring jsonString, rstring id ;
+	graph
+		(stream<DeviceEventTs, SensorReading> Import_1_out0) as WaterRequest =
+			Import()
+		{
+			param
+				subscription : eventType == "waterRequest" && device == "iotSprinkler" ;
+		}
+
+		(stream<DeviceEventTs, SensorReading> WeatherRequestStream ;
+			stream<DeviceEventTs, DemoDataType> DemoWeatherDataStream) as
+			WeatherDataRouter = Custom(Import_1_out0)
+		{
+			logic
+				onTuple Import_1_out0 :
+				{
+					mutable int32 error = 0 ;
+					rstring weatherData =
+						com.ibm.streamsx.inet.http::httpGet(getSubmissionTimeValue("host") + "/api/weather/simulatedforecast/daily",(list<rstring>)
+						[ "Content-Type: application/json" ], "", "", error) ;
+					printStringLn("[WeatherDataRouter] -- weatherData:" + weatherData) ;
+					if(error != 0 || weatherData == "")
+					{
+						mutable tuple<DeviceEventTs, SensorReading> outTuple = { } ;
+						assignFrom(outTuple, Import_1_out0) ;
+						printStringLn("[WeatherDataRouter] -- route to weather operator") ;
+						submit(outTuple, WeatherRequestStream) ;
+					}
+
+					else
+					{
+						mutable tuple<DeviceEventTs, DemoDataType> outTuple = { } ;
+						assignFrom(outTuple, Import_1_out0) ;
+						outTuple.jsonString = weatherData ;
+						printStringLn("[WeatherDataRouter] -- route to demo data") ;
+						submit(outTuple, DemoWeatherDataStream) ;
+					}
+
+				}
+
+		}
+
+		(stream<DeviceEventTs, tuple<ForecastDailyType result, rstring id>>
+			ForecastDaily_3_out0) as WeatherForecast =
+			ForecastDaily(WeatherRequestStream)
+		{
+			param
+				url: getSubmissionTimeValue("weather_url");
+				username: getSubmissionTimeValue("weather_user");
+				password: getSubmissionTimeValue("weather_pw");
+				latitidue : latitude ;
+				longitude : longitude ;
+				targetAttribute : "result" ;
+				units : "m" ;
+		}
+
+		(stream<DeviceEventTs, tuple<ForecastDailyType result, rstring id>>
+			JSONToTuple_4_out0) as DemoDataTransformation =
+			JSONToTuple(DemoWeatherDataStream)
+		{
+			param
+				targetAttribute : "result" ;
+				inputAttribute : jsonString ;
+		}
+
+		(stream<DeviceEventTs, DecisionType> Custom_5_out0) as DecisionRule =
+			Custom(ForecastDaily_3_out0, JSONToTuple_4_out0 as WeatherData)
+		{
+			logic
+				onTuple WeatherData :
+				{
+					mutable float64 qpf = 0.0 ;
+					mutable int32 counter = 0 ;
+					mutable boolean approval = false ;
+					mutable rstring reason = "" ;
+					mutable int32 error = 0 ;
+					mutable boolean waterBan = false;
+					rstring ban =
+						com.ibm.streamsx.inet.http::httpGet(getSubmissionTimeValue("host") + "/api/streams/governance",(list<rstring>)
+						[ "Content-Type: application/json" ], "", "", error) ;
+
+
+					if(error == 0 && findFirst(ban, "true") != - 1)
+					{
+						waterBan = true ;
+						reason = "Government ban is found in this area. ";
+
+					}
+
+					for(DailyDataType forecast in result.forecasts)
+					{
+						// calculate total qpf in next 2 days.
+						qpf = qpf + forecast.qpf ;
+						counter ++ ;
+						if(counter >= 2)
+						{
+ 							break ;
+						}
+
+					}
+
+					if(qpf < 5.0)
+					{ // not enough rain -> approve
+
+					    if(waterBan) {
+					        approval = false;
+					    }
+					    else {
+					        approval = true ;
+					        reason = "There will NOT be enough rain coming in next two days" ;
+					    }
+
+					}
+                    else
+					{
+						// enough rain -> reject
+						reason = reason + "There will be enough rain coming in next two days" ;
+						approval = false;
+
+					}
+
+
+					mutable tuple<DeviceEventTs, DecisionType> outTuple = { } ;
+					assignFrom(outTuple, WeatherData) ;
+					outTuple.qpf = qpf ;
+					outTuple.reason = reason ;
+					outTuple.approval = approval ;
+					submit(outTuple, Custom_5_out0) ;
+				}
+
+		}
+
+		(stream<DecisionType> Console ; stream<DeviceCmdId,
+			tuple<CommandInfo command>> SensorCommand) as DecisionRouterFilter =
+			Functor(Custom_5_out0)
+		{
+			output
+				Console : id = id, approval = approval, reason = reason, qpf = qpf ;
+				SensorCommand : cmdId = "approval", command =
+				{
+					id = id, approval = approval, reason = reason
+				} ;
+		}
+
+		(stream<rstring jsonString> TupleToJSON_6_out0) as DecisionTransformation =
+			TupleToJSON(Console as inPort0Alias)
+		{
+		}
+
+		() as ConsoleUpdater = HTTPPost(TupleToJSON_6_out0)
+		{
+			param
+				url : getSubmissionTimeValue("host") + "/api/streams/waterrequest" ;
+				headerContentType : "application/json" ;
+		}
+
+		() as DecisionExport = Export(SensorCommand, Custom_10_out0 as inPort0Alias)
+		{
+			param
+				properties : { device = "iotSprinkler", eventType = "waterApproval" } ;
+		}
+
+		(stream<DeviceCmdId, tuple<CommandInfo command>> Custom_10_out0) as WaterBanChecker = Custom()
+		{
+		   logic
+		        state: {
+		            mutable boolean waterBanInEffect = false;
+		        }
+		        onProcess: {
+
+		            while(!isShutdown()) {
+
+		                mutable int32 error = 0 ;
+		                rstring ban =
+						com.ibm.streamsx.inet.http::httpGet(getSubmissionTimeValue("host") + "/api/streams/governance",(list<rstring>)
+						[ "Content-Type: application/json" ], "", "", error) ;
+
+
+						if(error == 0 && findFirst(ban, "true") != - 1) {
+
+						    if(!waterBanInEffect) {
+
+						        waterBanInEffect = true;
+						        mutable tuple<DeviceCmdId, tuple<CommandInfo command>> outTuple = { } ;
+
+						        outTuple.cmdId = "approval";
+						        outTuple.command = { id = "", approval = false, reason = "Water Ban In Effect" };
+
+		                        submit(outTuple, Custom_10_out0) ;
+
+						    }
+
+		                }
+		                else {
+		                    waterBanInEffect = false;
+		                }
+		                printStringLn("Block 3 seconds before next governance check at " + (rstring)getTimestampInSecs());
+		                block(1.0);
+		                printStringLn("Block is waken up for next governance check at " + (rstring)getTimestampInSecs());
+		           }
+
+		           printStringLn("Application Shutdown");
+		       }
+		}
+}

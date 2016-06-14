@@ -1,0 +1,63 @@
+// begin_generated_IBM_copyright_prolog                             
+//                                                                  
+// This is an automatically generated copyright prolog.             
+// After initializing,  DO NOT MODIFY OR MOVE                       
+// **************************************************************** 
+// (C) Copyright IBM Corp.  2016, 2016                              
+// All Rights Reserved.                                             
+// **************************************************************** 
+// end_generated_IBM_copyright_prolog                               
+namespace com.ibm.streamsx.smartsprinkler.iot ;
+
+use com.ibm.streamsx.iot::* ;
+
+/**
+ * This application publishes commands to IoT devices
+ */
+composite IotSensorCommands
+{
+	graph
+		stream<DeviceCmdId, tuple<CommandInfo command>> Import_Command = Import()
+		{
+			param
+				subscription : eventType == "waterApproval" && device == "iotSprinkler" ;
+		}
+
+		stream<DeviceCmdId, tuple<CommandInfo command>> CustomOut = Custom(Import_Command) {
+           logic
+           		state:{
+           			mutable CustomOut lastTuple = {};
+           		}
+           		onTuple Import_Command:{
+           			if (deviceId == ""){
+           				// *HACK*
+           				// Given that there is no way to broadcast a command to all known devices, we are implementing a hack
+           				// where if the device id is not known, then we simply send the command to the last known device
+           				// For the demo, just re-use the saved device information as we only have one device
+           				mutable CustomOut outTuple = {};
+           				assignFrom(outTuple, lastTuple);
+           				outTuple.command = Import_Command.command;
+           				submit(outTuple, CustomOut);
+           			}
+           			else {
+           				submit(Import_Command, CustomOut);
+           				// save the last, so that we can use the device information for when we need to do a broadcast
+           				lastTuple = Import_Command;
+           			}
+
+           		}
+        }
+
+		@view(name = "SensorCommands", port = CommandJson, sampleSize = 500,
+			bufferSize = 500)
+		stream<DeviceCmd> CommandJson = CommandTupleToPayload(CustomOut)
+		{
+			param
+				payload : command ;
+		}
+
+		() as PublishCommand = CommandPublish(CommandJson)
+		{
+		}
+
+}
