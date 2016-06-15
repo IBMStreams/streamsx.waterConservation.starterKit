@@ -5,7 +5,7 @@ Starter kit for smart and connected sprinkler system using [Apache Quarks](http:
 ![Water Conservation Dashboard](readmeImg/water_conservation_dashboard.png)
 
 ## Overview
-This project implements a smart sprinkler system using IBM Insights for Weather, Watson IoT Platform and Streaming Analytics Service.  See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
+This project implements a smart sprinkler system using [IBM Insights for Weather](https://console.ng.bluemix.net/catalog/services/insights-for-weather), [Watson IoT Platform](http://www.ibm.com/cloud-computing/bluemix/internet-of-things/) and [Streaming Analytics Service](https://www.ng.bluemix.net/docs/services/StreamingAnalytics/index.html).  See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
 
 The Node.js application (dashboard) is hosted on [http://waterconservation.mybluemix.net/](http://waterconservation.mybluemix.net/).
 
