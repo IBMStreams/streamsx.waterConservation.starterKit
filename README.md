@@ -1,6 +1,6 @@
 # streamsx.waterConservation.starterKit
 
-Starter kit for smart and connected sprinkler system using Apache Quarks, Streaming Analytics and Insights for Weather
+Starter kit for smart and connected sprinkler system using [Apache Quarks](http://quarks.incubator.apache.org), Streaming Analytics and Insights for Weather
 
 ![Water Conservation Dashboard](readmeImg/water_conservation_dashboard.png)
 
@@ -11,7 +11,9 @@ The Node.js application (dashboard) is hosted on [http://waterconservation.myblu
 
 The Streams application is hosted on the Streaming Analytics Services on IBM Bluemix.
 
-The [moisture sensing application](com.ibm.streamsx.smartsprinkler.quarks) is written to run on Raspberry Pi.
+The [moisture sensing simulator application](com.ibm.streamsx.smartsprinkler.quarks) is written using [Apache Quarks](http://quarks.incubator.apache.org).  The simulator can be run on any workstation.  It can also be run with a moisture sensor and buzzer on a Raspberry Pi.
+
+*Apache Quarks is an effort undergoing Incubation at The Apache Software Foundation (ASF), sponsored by the Incubator.
 
 ## Deploy to Bluemix
 
