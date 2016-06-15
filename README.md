@@ -47,7 +47,7 @@ Then:
 
 By default, the server starts on localhost:3000
 
-## Deploy Quarks application on Raspberry Pi
+## Running the Apache Quarks Application
 
 Refer to [com.ibm.streamsx.smartsprinkler.quarks/README.md](com.ibm.streamsx.smartsprinkler.quarks/README.md) for further information.
 
