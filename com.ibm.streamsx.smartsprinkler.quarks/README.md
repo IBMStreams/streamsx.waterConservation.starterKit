@@ -12,13 +12,27 @@ To download the device file, click the hamburger icon on the top left corner, an
 
 ![Water Conservation Device Config](../readmeImg/water_conservation_devicecfg.png)
 
-## Setup project on your workstation
+## Running Simulation on your workstation
+
+1.  Download the smartsprinkler.quarks-1.0.0.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
+1.  Make sure device.cfg and the smartsprinkler.quarks-x.x.x.jar are in the same directory.
+1.  In the device.cfg file, set the `simulation` property to `true`.
+1.  Run the simulator using this commaind in the terminal:  `java -jar smartsprinkler.quarks-x.x.x.jar`
+
+## Running on your Raspberry Pi 2
+1.  Connect the digital output of moisture sensor to GPIO17
+1.  Connect the buzzer input to GPIO23
+1.  Download the smartsprinkler.quarks-1.0.0.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
+1.  Make sure device.cfg and the smartsprinkler.quarks-x.x.x.jar are in the same directory.
+1.  Run the simulator using this commaind in the terminal:  `sudo java -jar smartsprinkler.quarks-x.x.x.jar`
+
+## Developing the Quarks Application
 
 1. Import the eclipse project in `com.ibm.streamsx.smartsprinkler.quarks`
 1. Download [Apache Quarks][1] and [Pi4J][2] libraries, and make the jar files available on your machine.  This project assumes they are installed in `/opt/quarks` and `/opt/pi4j` respectively.  If you installed the libraries in a different location, adjust the project build paths accordingly.
 1. Copy the device configuration file to the root of the project
 
-## Running Simulation on your workstation
+### Running Your Project using Eclipse
 
 1. Ensure the Node.js application (i.e. the dashboard) is running on Bluemix.
 1. Modify `device.cfg`, and set the property `simulation` to `true`.
@@ -26,7 +40,7 @@ To download the device file, click the hamburger icon on the top left corner, an
 1. Right click `SmartSprinklerApp.java`, and Run as Java Application.
 1. The dashboard should plot the moisture data received by this application on the graph.
 
-## Running on your Raspberry Pi
+### Running Your Project on Raspberry Pi
 
 1. Create a runnable Jar file by right clicking on the project, and Export as a Runnable JAR file.
 1. Select the launch configuration that was created when you run the simulation on the workstation.
