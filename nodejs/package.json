@@ -3,10 +3,15 @@
   "version": "1.0.0",
   "description": "Water Conservation",
   "main": "start.js",
+  "private": true,
   "scripts": {
     "start": "node start",
     "build": "node build_dist",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/IBMStreams/streamsx.waterConservation.starterKit"
   },
   "engines": {
     "node": ">=4.3.2"

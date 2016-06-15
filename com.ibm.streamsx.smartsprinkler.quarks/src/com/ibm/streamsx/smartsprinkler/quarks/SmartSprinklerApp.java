@@ -10,9 +10,6 @@
 package com.ibm.streamsx.smartsprinkler.quarks;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import com.google.gson.JsonObject;
@@ -37,36 +34,18 @@ public class SmartSprinklerApp {
 	public static final double THRESHOLD_HIGH = 700;
 
 	private static final String DEVICE_FN = "./device.cfg";
-	private static final String UI_HOST_KEY = "ui-host";
-	private static final String SIMULATION_KEY = "simulation";
-
-	private static String uiHostUrl;
-	private static Boolean runSimulation;
-	private static void readDeviceFile() {
-		try (FileInputStream input = new FileInputStream(DEVICE_FN)){
-			Properties prop = new Properties();
-			prop.load(input);
-			
-			uiHostUrl = prop.getProperty(UI_HOST_KEY);			
-			System.out.println("UI host configure to: " + uiHostUrl);
-			
-			runSimulation = Boolean.parseBoolean(prop.getProperty(SIMULATION_KEY, "false"));
-			System.out.println("Running Simulation: " + runSimulation);
-		} catch (IOException ex) {
-			ex.printStackTrace();
-		}
-	}
 	
 	public static void main(String[] args) throws Exception {
-		readDeviceFile();
+		DeviceConfig devicecfg = new DeviceConfig(DEVICE_FN);
 		
-		ISprinklerController smartSprinkler = runSimulation ? new SprinklerSimulator() : new SprinklerSimulatorWithSensor();
+		ISprinklerController smartSprinkler = devicecfg.isSimulation() ? new SprinklerSimulator() : new SprinklerSimulatorWithSensor();
 
 		DirectProvider dp = new DirectProvider();
 		Topology topology = dp.newTopology();
 		
-		// poll from sensor once every second
-		TStream<Reading> moistureReading = topology.poll(smartSprinkler, 1500, TimeUnit.MILLISECONDS);
+		// poll from sensor periodically
+		final long msec = devicecfg.isSimulation() ? 3000 : 1000;		
+		TStream<Reading> moistureReading = topology.poll(smartSprinkler, msec, TimeUnit.MILLISECONDS);
 
 		// set up window of 9 readings
 		TWindow<Reading, ?> lastNReadings = moistureReading.last(9, t -> {
@@ -94,7 +73,7 @@ public class SmartSprinklerApp {
 		// This is done so that we can visualize the data.
 		// In reality, this is not needed
 		TSink<Reading> httpPost = avg.sink(avgMoisture -> {
-			PostReading sink = new PostReading(uiHostUrl + "/api/streams/sensorreading");
+			PostReading sink = new PostReading(devicecfg.getUIHostURL() + "/api/streams/sensorreading");
 			
 			sink.post(avgMoisture);
 		});

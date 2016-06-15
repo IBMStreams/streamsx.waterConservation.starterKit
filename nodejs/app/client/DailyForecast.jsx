@@ -204,14 +204,6 @@ class RainSlider extends BaseComponent {
       marginTop: '-28px'
     };
 
-    const zeus_style = {
-      width: '100px',
-      height: '100px',
-      paddingRight: '10px',
-      paddingLeft: '10px',
-      marginTop: '-28px'
-    };
-
     // Hide the control if simulator is not enabled.
     container.display = this.props.enable
       ? 'flex'
@@ -219,7 +211,6 @@ class RainSlider extends BaseComponent {
 
     return (
       <div style={container}>
-        <img style={zeus_style} src="/images/zeus.png"/>
         <img style={img_style} src={getIconURL(40)}/>
         <Slider defaultValue={this.state.rain_level} step={0.1} value={this.state.rain_level} onChange={this.handleChange} style={{
           flexGrow: 1
@@ -337,8 +328,8 @@ class DailyForecast extends BaseComponent {
     const temp_min = _.min(_.concat(max_temps, min_temps));
 
     const rain_simulator_status_text = this.state.rain_simulator.enable
-      ? ''
-      : 'Weather God is OFFLINE';
+      ? 'Slide to control weather condition'
+      : 'Sunshine switch';
 
     return (
       <Card>

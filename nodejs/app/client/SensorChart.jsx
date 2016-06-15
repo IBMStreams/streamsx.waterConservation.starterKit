@@ -9,7 +9,6 @@
 /* end_generated_IBM_copyright_prolog                               */
 import React from 'react';
 import Card from 'material-ui/lib/card/card';
-// import CardHeader from 'material-ui/lib/card/card-header';
 import CardActions from 'material-ui/lib/card/card-actions';
 import Avatar from 'material-ui/lib/avatar';
 import Toggle from 'material-ui/lib/toggle';
@@ -382,15 +381,8 @@ class SensorChart extends BaseComponent {
       ? this.state.moistureData[currentMoistureLevelIdx]
       : 0;
 
-    // <CardHeader title="Moisture Sensor Status" subtitle="from Raspberry Pie" titleColor={AppTheme.cardTitleColor} subtitleColor={AppTheme.cardSubtitleColor} avatar="images/weathericons/icon19.png" style={{
-    //   backgroundColor: AppTheme.palette.primary2Color
-    // }} titleStyle={{
-    //   fontSize: 'large'
-    // }}/>
-
     return (
       <Card>
-
         <CardActions style={{
           backgroundColor: AppTheme.cardActionsBackground
         }}>
