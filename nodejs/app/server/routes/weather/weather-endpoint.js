@@ -45,7 +45,7 @@ var last_daily_result = null;
 var last_retrieved_time = null;
 var simulation_status = {
   enable: false,
-  rainy: 0.5
+  rainy: 1.0         // default to sunny weather (0.0: rainy, 1.0: sunny)
 };
 const max_qpf = 5.0;
 
