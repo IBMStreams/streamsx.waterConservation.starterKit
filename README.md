@@ -25,6 +25,8 @@ Create a [Bluemix](https://bluemix.net/) account.
 
 Click the button below to fork into IBM DevOps Services and deploy your own copy of this application on Bluemix, with a DevOps toolchain already configured.
 
+We are deploying a number of applications onto Bluemix.  This process will take about 15 minutes to complete.
+
 [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy/index.html?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ### Option 2: Manual Deployment
