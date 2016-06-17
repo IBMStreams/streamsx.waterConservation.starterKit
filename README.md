@@ -5,6 +5,24 @@ Starter kit for smart and connected sprinkler system using [Apache Quarks](http:
 ![Water Conservation Dashboard](readmeImg/water_conservation_dashboard.png)
 
 ## Overview
+
+Water scarcity is one of the most pressing problems in the world right now.  According to the World Wildlife Fund (WWF), 70% of our planet is covered by water. However, only 3% of it is fresh water, and only one-third of that is available for consumption. Many water systems are stressed due to the growing human population and over-consumption. Agriculture consumes more water than any other source. Much of the water used in agriculture is wasted due to inefficient irrigation systems. To alleviate this problem, many governments impose restrictions on water usage, especially in drought-stricken states like California. However, these bans are difficult to enforce. For example, some people can afford to violate the restrictions and simply pay the fines.
+
+To improve irrigation efficiency and properly enforce water usage restrictions, this starter kit is a prototype for a smarter, connected sprinkler system.
+
+### Water app architecture
+
+This system consists of two main analytics components:
+
+* Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Quarks. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
+* Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Watson Insights for Weather API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
+
+For rapid application development, we leveraged other Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Quarks application to communicate with the IBM Streams application easily via MQTT.
+
+To visualize the data, we implemented a visualization server using the SDK for Node.js service, and we used React.js to implement a web-based dashboard.
+
+This smart sprinkler system now enables more efficient water irrigation based on current soil conditions. The prototype only takes the moisture level into account, but the system could be extended to monitor and analyze other important factors like moisture evaporation rate, soil mineral content, or irrigation requirements based on the type of vegetation being planted. Controlling the sprinklers in a centralized manner enabled us to implement business rules for managing water resources and properly enforcing water restrictions when necessary.
+
 This project implements a smart sprinkler system using [IBM Insights for Weather](https://console.ng.bluemix.net/catalog/services/insights-for-weather), [Watson IoT Platform](http://www.ibm.com/cloud-computing/bluemix/internet-of-things/) and [Streaming Analytics Service](https://www.ng.bluemix.net/docs/services/StreamingAnalytics/index.html).  See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
 
 The Node.js application (dashboard) is hosted on [http://waterconservation.mybluemix.net/](http://waterconservation.mybluemix.net/).
