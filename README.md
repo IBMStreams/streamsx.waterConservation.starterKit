@@ -53,8 +53,8 @@ An demonstration of the centralized analytics system is hosted here: [http://wat
 To try out this starter kit:
 
 1.  Deploy the centralized analyltics application onto Bluemix following the instructions below.
-2.  Download the device.cfg file.
-2.  Download a copy of the Apache Quarks application.  Run the application on your workstation or on a Raspberry Pi.
+2.  Follow instructions [here](com.ibm.streamsx.smartsprinkler.quarks/README.md) to set up device configuration file.
+2.  Download a copy of the Apache Quarks application from the [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases) page.  Run the application on your workstation or on a Raspberry Pi.
 
 ## Deploy to Bluemix
 
