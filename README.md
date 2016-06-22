@@ -1,10 +1,8 @@
-# streamsx.waterConservation.starterKit
-
-Starter kit for smart and connected sprinkler system using [Apache Quarks](http://quarks.incubator.apache.org), Streaming Analytics and Insights for Weather
-
-![Water Conservation Dashboard](readmeImg/water_conservation_dashboard.png)
+# streamsx.waterConservation.starterKit   [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy/index.html?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ## Overview
+
+![Water Conservation Dashboard](readmeImg/water_conservation_dashboard.png)
 
 Water scarcity is one of the most pressing problems in the world right now.  According to the World Wildlife Fund (WWF), 70% of our planet is covered by water. However, only 3% of it is fresh water, and only one-third of that is available for consumption. Many water systems are stressed due to the growing human population and over-consumption. Agriculture consumes more water than any other source. Much of the water used in agriculture is wasted due to inefficient irrigation systems. To alleviate this problem, many governments impose restrictions on water usage, especially in drought-stricken states like California. However, these bans are difficult to enforce. For example, some people can afford to violate the restrictions and simply pay the fines.
 
@@ -52,7 +50,7 @@ An demonstration of the centralized analytics system is hosted here: [http://wat
 
 To try out this starter kit:
 
-1.  Deploy the centralized analyltics application onto Bluemix.  Press this button, or follow the instructions below:  [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy/index.html?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
+1.  Deploy the centralized analyltics application onto Bluemix, following the instructions below. 
 2.  Follow instructions [here](com.ibm.streamsx.smartsprinkler.quarks/README.md) to set up device configuration file.
 2.  Download a copy of the Apache Quarks application from the [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases) page.  Run the application on your workstation or on a Raspberry Pi.
 
