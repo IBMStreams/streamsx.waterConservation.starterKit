@@ -27,7 +27,7 @@ To visualize the data, we implemented a visualization server using the SDK for N
 
 This smart sprinkler system now enables more efficient water irrigation based on current soil conditions. The prototype only takes the moisture level into account, but the system could be extended to monitor and analyze other important factors like moisture evaporation rate, soil mineral content, or irrigation requirements based on the type of vegetation being planted. Controlling the sprinklers in a centralized manner enabled us to implement business rules for managing water resources and properly enforcing water restrictions when necessary.
 
-See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
+See the [Google+ Hangout Event](https://www.youtube.com/watch?v=Rvc1CqNJkOA) for more detail.
 
 ## Services Used in this Starter Kit
 
