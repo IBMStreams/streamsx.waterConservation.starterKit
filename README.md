@@ -12,7 +12,11 @@ To improve irrigation efficiency and properly enforce water usage restrictions, 
 
 ### Water Conservation Application Architecture
 
-The starter kit demonstrate the reference architecture of using Apache Quarks and how it can work in conjunction with a centalized analytics system.  This system consists of two main analytics components:
+The starter kit demonstrates the reference architecture of using Apache Quarks and how it can work in conjunction with a centalized analytics system.  
+
+![Water Conservation Application Architecture](readmeImg/water_arch1_edited.jpg)
+
+This system consists of two main analytics components:
 
 * Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Quarks. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
 * Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Watson Insights for Weather API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
@@ -23,15 +27,34 @@ To visualize the data, we implemented a visualization server using the SDK for N
 
 This smart sprinkler system now enables more efficient water irrigation based on current soil conditions. The prototype only takes the moisture level into account, but the system could be extended to monitor and analyze other important factors like moisture evaporation rate, soil mineral content, or irrigation requirements based on the type of vegetation being planted. Controlling the sprinklers in a centralized manner enabled us to implement business rules for managing water resources and properly enforcing water restrictions when necessary.
 
-This project implements a smart sprinkler system using [IBM Insights for Weather](https://console.ng.bluemix.net/catalog/services/insights-for-weather), [Watson IoT Platform](http://www.ibm.com/cloud-computing/bluemix/internet-of-things/) and [Streaming Analytics Service](https://www.ng.bluemix.net/docs/services/StreamingAnalytics/index.html).  See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
+See the [Google+ Hangout Event](https://plus.google.com/events/c9i8t4j2mqq7g0d6ftad84c5bd8) for more detail.
 
-The Node.js application (dashboard) is hosted on [http://waterconservation.mybluemix.net/](http://waterconservation.mybluemix.net/).
+## Services Used in this Starter Kit
 
-The Streams application is hosted on the Streaming Analytics Services on IBM Bluemix.
+### Analytics on Edge Device
 
 The [moisture sensing simulator application](com.ibm.streamsx.smartsprinkler.quarks) is written using [Apache Quarks](http://quarks.incubator.apache.org).  The simulator can be run on any workstation.  It can also be run with a moisture sensor and buzzer on a Raspberry Pi.
 
 *Apache Quarks is an effort undergoing Incubation at The Apache Software Foundation (ASF), sponsored by the Incubator.
+
+### Centalized Streaming Analytics System
+
+The centralized streaming analytics system uses the following Bluemix services:
+
+* [IBM Insights for Weather](https://console.ng.bluemix.net/catalog/services/insights-for-weather)
+* [Watson IoT Platform](http://www.ibm.com/cloud-computing/bluemix/internet-of-things/)
+* [Streaming Analytics Service](https://www.ng.bluemix.net/docs/services/StreamingAnalytics/index.html)
+* [SDK for Node.js](https://console.ng.bluemix.net/catalog/starters/sdk-for-nodejs)
+
+An demonstration of the centralized analytics system is hosted here: [http://waterconservation.mybluemix.net/](http://waterconservation.mybluemix.net/).
+
+## Getting Started
+
+To try out this starter kit:
+
+1.  Deploy the centralized analyltics application onto Bluemix following the instructions below.
+2.  Download the device.cfg file.
+2.  Download a copy of the Apache Quarks application.  Run the application on your workstation or on a Raspberry Pi.
 
 ## Deploy to Bluemix
 
