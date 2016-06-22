@@ -10,9 +10,9 @@ Water scarcity is one of the most pressing problems in the world right now.  Acc
 
 To improve irrigation efficiency and properly enforce water usage restrictions, this starter kit is a prototype for a smarter, connected sprinkler system.
 
-### Water app architecture
+### Water Conservation Application Architecture
 
-This system consists of two main analytics components:
+The starter kit demonstrate the reference architecture of using Apache Quarks and how it can work in conjunction with a centalized analytics system.  This system consists of two main analytics components:
 
 * Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Quarks. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
 * Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Watson Insights for Weather API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
