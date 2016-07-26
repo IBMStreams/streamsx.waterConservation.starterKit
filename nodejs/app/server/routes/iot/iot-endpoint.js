@@ -37,7 +37,7 @@ endpt.get('/devicecfg', function(req, res, next) {
       cfg += '\n' + key + ' = ' + value;
     });
     cfg += '\nui-host = ' + config.server.ui_host;
-    cfg += '\nsimulation = false';
+    cfg += '\nsimulation = true';
 
     res.set('Content-Disposition', 'attachment; filename=device.cfg');
     res.set('Content-Type', 'application/octet-stream');
