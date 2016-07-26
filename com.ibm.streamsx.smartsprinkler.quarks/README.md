@@ -23,8 +23,16 @@ To download the device file, click the hamburger icon on the top left corner, an
 1.  Connect the digital output of moisture sensor to GPIO17
 1.  Connect the buzzer input to GPIO23
 1.  Download the smartsprinkler.quarks-x.x.x.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
+1.  In the device.cfg file, set the `simulation` property to `false`.
 1.  Make sure device.cfg and the smartsprinkler.quarks-x.x.x.jar are in the same directory.
 1.  Run the simulator using this command in the terminal:  `sudo java -jar smartsprinkler.quarks-x.x.x.jar`
+
+*What kind of moisture sensor did you use?*
+We got our moisture sensor from here:
+
+[Moisture Sensor from ModMyPi](http://www.modmypi.com/electronics/sensors/soil-moisture-sensor)
+
+At the end of this page, there is a tutorial on how to connect this moisture sensor.
 
 ## Developing the Quarks Application
 
