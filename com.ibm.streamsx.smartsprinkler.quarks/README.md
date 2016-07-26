@@ -28,11 +28,10 @@ To download the device file, click the hamburger icon on the top left corner, an
 1.  Run the simulator using this command in the terminal:  `sudo java -jar smartsprinkler.quarks-x.x.x.jar`
 
 *What kind of moisture sensor did you use?*
-
 We got our moisture sensor from here:
 [Moisture Sensor from ModMyPi](http://www.modmypi.com/electronics/sensors/soil-moisture-sensor)
 
-At the end of this page, there is a tutorial on how to connect this moisture sensor.
+Here's a tutorial on how to connect the sensor:  [Raspberry Pi Moisture Sensor Tutorial](http://www.modmypi.com/blog/raspberry-pi-plant-pot-moisture-sensor-with-email-notification-tutorial)
 
 ## Developing the Quarks Application
 
