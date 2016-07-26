@@ -23,7 +23,7 @@ var device_cfg_file = null;
 // getIotfAPI() expects the credential to have the following fields:
 // {
 //   "org": "xxxxxx",
-//   "base_uri": "https://xxxxxx.internetofthings.ibmcloud.com:xxx/api/vxxxx",
+//   "http_host": "xxxxxx.internetofthings.ibmcloud.com"
 //   "apiKey": "xxxxx",
 //   "apiToken": "xxxxx"
 // }
@@ -31,13 +31,11 @@ function getIotfApiUrl(credential, path, query) {
   // IOTF docs:
   // https://docs.internetofthings.ibmcloud.com/swagger/v0002.html?cm_mc_uid=43678319775414535003853&cm_mc_sid_50200000=1465224726#/
 
-  const uri = url.parse(credential.base_uri);
   const v2_path = '/api/v0002';
   return url.format({
     auth: credential.apiKey + ':' + credential.apiToken,
-    protocol: uri.protocol,
-    hostname: uri.hostname,
-    port: uri.port,
+    protocol: 'https',
+    hostname: credential.http_host,
     pathname: v2_path + path,
     query: query
   });
