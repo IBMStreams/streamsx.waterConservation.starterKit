@@ -1,7 +1,7 @@
 applications:
 - name: waterconservation
   services:
-  - Insights-for-Weather
+  - Weather-Company-Data
   - Streaming-Analytics
   - Internet-of-Things-Platform
   disk_quota: 1024M
@@ -14,9 +14,9 @@ applications:
   memory: 512M
 
 declared-services:
-  Insights-for-Weather:
+  Weather-Company-Data:
     label: weatherinsights
-    plan: Free
+    plan: Free-v2
   Streaming-Analytics:
     label: streaming-analytics
     plan: Standard
