@@ -20,15 +20,16 @@ const utils = require.main.require('./app/server/common/utils');
 const io = require.main.require('./app/server/routes/socket/io-socket');
 const logger = require.main.require('./app/server/common/logger');
 
-const markham_geocode = "43.85,-79.34";
+const markham_geocode_latitude = '43.85';
+const markham_geocode_longitude = '-79.34';
 
 function weatherAPI(path, queries, cb) {
   request({
     url: url.resolve(config.weather.url, path),
-    method: "GET",
+    method: 'GET',
     headers: {
-      "Content-Type": "application/json;charset=utf-8",
-      "Accept": "application/json"
+      'Content-Type': 'application/json;charset=utf-8',
+      'Accept': 'application/json'
     },
     qs: queries
   }, function(err, req, data) {
@@ -49,6 +50,9 @@ var simulation_status = {
 };
 const max_qpf = 5.0;
 
+
+// Weather API documents:
+// https://twcservice.mybluemix.net/rest-api/
 function getRealWeatherDaily(query, cb) {
   const datefmt = 'MM-DD';
   if (!last_retrieved_time) {
@@ -57,10 +61,14 @@ function getRealWeatherDaily(query, cb) {
   const now = moment().format(datefmt);
 
   if (last_retrieved_time !== now || !last_daily_result) {
-    weatherAPI("/api/weather/v2/forecast/daily/10day", {
-      geocode: query.geocode || markham_geocode,
-      units: query.units || "m",
-      language: query.language || "en"
+    const weatherurl = '/api/weather/v1/geocode' +
+      '/' + markham_geocode_latitude +
+      '/' + markham_geocode_longitude +
+      '/forecast/daily/10day.json';
+
+    weatherAPI(weatherurl, {
+      units: query.units || 'm',
+      language: query.language || 'en'
     }, function(err, result) {
       if (err) {
         return cb(err);
@@ -154,10 +162,14 @@ endpt.get('/forecast/daily', function(req, res, next) {
 });
 
 endpt.get('/forecast/hourly', function(req, res, next) {
-  weatherAPI("/api/weather/v2/forecast/hourly/24hour", {
-    geocode: req.query.geocode || markham_geocode,
-    units: req.query.units || "m",
-    language: req.query.language || "en"
+  const weatherurl = '/api/weather/v1/geocode' +
+    '/' + markham_geocode_latitude +
+    '/' + markham_geocode_longitude +
+    '/forecast/hourly/48hour.json';
+
+  weatherAPI(weatherurl, {
+    units: req.query.units || 'm',
+    language: req.query.language || 'en'
   }, function(err, result) {
     if (err) {
       return next(err);
