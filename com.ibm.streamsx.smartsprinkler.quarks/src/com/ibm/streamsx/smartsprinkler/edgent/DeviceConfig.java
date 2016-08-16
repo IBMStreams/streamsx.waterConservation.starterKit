@@ -7,7 +7,7 @@
 /* All Rights Reserved.                                             */
 /* **************************************************************** */
 /* end_generated_IBM_copyright_prolog                               */
-package com.ibm.streamsx.smartsprinkler.quarks;
+package com.ibm.streamsx.smartsprinkler.edgent;
 
 import java.io.FileInputStream;
 import java.io.IOException;

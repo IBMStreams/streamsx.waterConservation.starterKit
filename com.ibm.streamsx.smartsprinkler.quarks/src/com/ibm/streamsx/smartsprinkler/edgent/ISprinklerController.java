@@ -7,9 +7,9 @@
 /* All Rights Reserved.                                             */
 /* **************************************************************** */
 /* end_generated_IBM_copyright_prolog                               */
-package com.ibm.streamsx.smartsprinkler.quarks;
+package com.ibm.streamsx.smartsprinkler.edgent;
 
-import quarks.function.Supplier;
+import org.apache.edgent.function.Supplier;
 
 /**
  * Sprinkler controller interface for application

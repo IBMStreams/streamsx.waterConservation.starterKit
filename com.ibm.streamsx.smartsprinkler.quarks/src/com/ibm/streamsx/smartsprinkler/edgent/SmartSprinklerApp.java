@@ -7,21 +7,20 @@
 /* All Rights Reserved.                                             */
 /* **************************************************************** */
 /* end_generated_IBM_copyright_prolog                               */
-package com.ibm.streamsx.smartsprinkler.quarks;
+package com.ibm.streamsx.smartsprinkler.edgent;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
 
-import com.google.gson.JsonObject;
+import org.apache.edgent.connectors.iot.QoS;
+import org.apache.edgent.connectors.iotp.IotpDevice;
+import org.apache.edgent.providers.direct.DirectProvider;
+import org.apache.edgent.topology.TSink;
+import org.apache.edgent.topology.TStream;
+import org.apache.edgent.topology.TWindow;
+import org.apache.edgent.topology.Topology;
 
-import quarks.connectors.iot.IotDevice;
-import quarks.connectors.iot.QoS;
-import quarks.connectors.iotf.IotfDevice;
-import quarks.providers.direct.DirectProvider;
-import quarks.topology.TSink;
-import quarks.topology.TStream;
-import quarks.topology.TWindow;
-import quarks.topology.Topology;
+import com.google.gson.JsonObject;
 
 public class SmartSprinklerApp {
 	/* begin_generated_IBM_copyright_code                               */
@@ -86,7 +85,7 @@ public class SmartSprinklerApp {
 		dry.print();
 
 		// send to IoTF to request to turn on sprinkler
-		IotDevice device = new IotfDevice(topology, new File(DEVICE_FN));
+		IotpDevice device = new IotpDevice(topology, new File(DEVICE_FN));
 
 		// convert to json object
 		TStream<JsonObject> json = dry.map(v -> {

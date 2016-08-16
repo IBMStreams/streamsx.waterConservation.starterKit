@@ -7,7 +7,7 @@
 /* All Rights Reserved.                                             */
 /* **************************************************************** */
 /* end_generated_IBM_copyright_prolog                               */
-package com.ibm.streamsx.smartsprinkler.quarks;
+package com.ibm.streamsx.smartsprinkler.edgent;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
