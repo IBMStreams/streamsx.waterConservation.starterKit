@@ -27,7 +27,10 @@ var config = {
       'process.env': {
         'NODE_ENV': JSON.stringify('production')
       }
-    })
+    }),
+    new Webpack.EnvironmentPlugin([
+      "npm_package_version"
+    ])
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']

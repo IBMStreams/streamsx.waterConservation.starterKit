@@ -9,5 +9,5 @@
 // end_generated_IBM_copyright_prolog                               
 namespace com.ibm.streamsx.smartsprinkler.iot;
 
-type SensorReading = rstring id, float64 latitude, float64 longitude, float64 soilMoisture ;
+type SensorReading = rstring id, float64 latitude, float64 longitude, float64 moisture ;
 type CommandInfo = rstring id, boolean approval, rstring reason ;
