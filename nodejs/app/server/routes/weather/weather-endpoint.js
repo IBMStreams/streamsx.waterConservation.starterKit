@@ -20,8 +20,8 @@ const utils = require.main.require('./app/server/common/utils');
 const io = require.main.require('./app/server/routes/socket/io-socket');
 const logger = require.main.require('./app/server/common/logger');
 
-const markham_geocode_latitude = '43.85';
-const markham_geocode_longitude = '-79.34';
+const markham_geocode_latitude = '43.7001100';
+const markham_geocode_longitude = '-79.4163000';
 
 function weatherAPI(path, queries, cb) {
   request({

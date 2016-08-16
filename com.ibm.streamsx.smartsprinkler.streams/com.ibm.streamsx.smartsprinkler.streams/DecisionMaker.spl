@@ -18,9 +18,6 @@ use com.ibm.streamsx.iot::* ;
 composite DecisionMaker {
     type
 		DecisionType = rstring id, boolean approval, rstring reason, float64 qpf ;
-		SensorReading = rstring id, float64 latitude, float64 longitude,
-			float64 soilMoisture ;
-		CommandInfo = rstring id, boolean approval, rstring reason ;
 		DemoDataType = rstring jsonString, rstring id ;
 	graph
 		(stream<DeviceEventTs, SensorReading> Import_1_out0) as WaterRequest =

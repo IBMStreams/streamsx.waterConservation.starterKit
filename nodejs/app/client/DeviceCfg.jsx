@@ -47,6 +47,9 @@ class DeviceCfg extends BaseComponent {
   render() {
     const textarea = this.state.errmsg || this.state.devicecfg || 'Updating...';
     const disableButton = _.isEmpty(this.state.devicecfg);
+    const appVersion = process.env.npm_package_version;
+    const quarkFn = `smartsprinkler.quarks-${appVersion}.jar`;
+    const quarkUrl = `https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases/download/v${appVersion}/${quarkFn}`;
 
     return (
       <Card>
@@ -66,12 +69,19 @@ class DeviceCfg extends BaseComponent {
           />
           <br />
           <RaisedButton
-            label="Download"
+            label="Download device.cfg"
             linkButton={true}
             icon={<Download />}
             download="device.cfg"
             href="/api/iot/devicecfg"
             disabled={disableButton}
+          />
+          <hr/>
+          <RaisedButton
+            label={`Download ${quarkFn}`}
+            linkButton={true}
+            icon={<Download />}
+            href={quarkUrl}
           />
         </CardText>
       </Card>

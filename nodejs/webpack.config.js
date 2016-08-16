@@ -52,7 +52,12 @@ var config = {
     ]
   },
 
-  plugins: [new Webpack.HotModuleReplacementPlugin()]
+  plugins: [
+    new Webpack.HotModuleReplacementPlugin(),
+    new Webpack.EnvironmentPlugin([
+      "npm_package_version"
+    ])
+  ]
 };
 
 module.exports = config;

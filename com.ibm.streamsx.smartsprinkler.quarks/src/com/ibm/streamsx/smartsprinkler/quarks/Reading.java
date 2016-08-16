@@ -26,8 +26,8 @@ public class Reading implements Serializable {
 	/* end_generated_IBM_copyright_code                                 */
 
 	// coordinates from GPS 
-	// private double latitude = 43.7001100;
-	// private double longitude = -79.4163000;
+	private double latitude = 43.7001100;
+	private double longitude = -79.4163000;
 	
 	// sprinkler is on or off
 	private boolean sprinkler_on = false;
