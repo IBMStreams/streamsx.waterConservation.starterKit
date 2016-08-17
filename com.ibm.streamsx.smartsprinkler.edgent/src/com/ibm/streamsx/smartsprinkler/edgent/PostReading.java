@@ -12,7 +12,6 @@ package com.ibm.streamsx.smartsprinkler.edgent;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
-import org.apache.http.HttpResponse;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -39,7 +38,7 @@ public class PostReading {
 			StringEntity postingString = new StringEntity(reading.toJson());
 			post.setEntity(postingString);
 			post.setHeader("Content-type", "application/json");
-			HttpResponse  response = httpClient.execute(post);
+			httpClient.execute(post);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

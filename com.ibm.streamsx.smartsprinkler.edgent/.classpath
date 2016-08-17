@@ -2,7 +2,30 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/PI4J"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Edgent"/>
+	<classpathentry kind="var" path="PI4J"/>
+	<classpathentry kind="var" path="PI4J/lib/junit.jar"/>
+	<classpathentry kind="var" path="PI4J/lib/pi4j-core.jar"/>
+	<classpathentry kind="var" path="PI4J/lib/pi4j-device.jar"/>
+	<classpathentry kind="var" path="PI4J/lib/pi4j-gpio-extension.jar"/>
+	<classpathentry kind="var" path="PI4J/lib/pi4j-service.jar"/>
+	<classpathentry kind="var" path="EDGENT"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.execution.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.function.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.graph.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.oplet.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.topology.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.api.window.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.providers.development.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.providers.direct.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.providers.iot.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.runtime.appservice.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.runtime.etiao.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.runtime.jmxcontrol.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.runtime.jobregistry.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.runtime.jsoncontrol.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.spi.graph.jar"/>
+	<classpathentry kind="var" path="EDGENT/lib/edgent.spi.topology.jar"/>
+	<classpathentry kind="var" path="EDGENT/connectors/http/lib/edgent.connectors.http.jar"/>
+	<classpathentry kind="var" path="EDGENT/connectors/iotp/lib/edgent.connectors.iotp.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

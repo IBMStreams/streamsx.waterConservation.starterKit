@@ -17,7 +17,7 @@ The starter kit demonstrates the reference architecture of using Apache Edgent a
 This system consists of two main analytics components:
 
 * Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Edgent. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
-* Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Watson Insights for Weather API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
+* Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Weather Company Data API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
 
 For rapid application development, we leveraged other Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Edgent application to communicate with the IBM Streams application easily via MQTT.
 
@@ -39,7 +39,7 @@ The [moisture sensing simulator application](com.ibm.streamsx.smartsprinkler.edg
 
 The centralized streaming analytics system uses the following Bluemix services:
 
-* [IBM Insights for Weather](https://console.ng.bluemix.net/catalog/services/insights-for-weather)
+* [Weather Company Data for IBM Bluemix](https://console.ng.bluemix.net/catalog/services/weather-company-data-for-ibm-bluemix/)
 * [Watson IoT Platform](http://www.ibm.com/cloud-computing/bluemix/internet-of-things/)
 * [Streaming Analytics Service](https://www.ng.bluemix.net/docs/services/StreamingAnalytics/index.html)
 * [SDK for Node.js](https://console.ng.bluemix.net/catalog/starters/sdk-for-nodejs)
@@ -50,7 +50,7 @@ An demonstration of the centralized analytics system is hosted here: [http://wat
 
 To try out this starter kit:
 
-1.  Deploy the centralized analyltics application onto Bluemix, following the instructions below. 
+1.  Deploy the centralized analyltics application onto Bluemix, following the instructions below.
 2.  Follow instructions [here](com.ibm.streamsx.smartsprinkler.edgent/README.md) to set up device configuration file.
 2.  Download a copy of the Apache Edgent application from the [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases) page.  Run the application on your workstation or on a Raspberry Pi.
 
@@ -72,7 +72,7 @@ We are deploying a number of applications onto Bluemix.  This process will take 
 
 In Bluemix:
   1. Create a Streaming Analytics Service with the name `Streaming-Analytics`
-  1. Create a Insights for Weather Service with the name `Insights-for-Weather`
+  1. Create a Weather Company Data Service with the name `Weather-Company-Data`
   1. Create a Watson IoT Platform Service with the name `Internet-of-Things-Platform`
 
 Then:
