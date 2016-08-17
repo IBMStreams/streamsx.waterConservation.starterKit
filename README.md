@@ -10,16 +10,16 @@ To improve irrigation efficiency and properly enforce water usage restrictions, 
 
 ### Water Conservation Application Architecture
 
-The starter kit demonstrates the reference architecture of using Apache Quarks and how it can work in conjunction with a centalized analytics system.  
+The starter kit demonstrates the reference architecture of using Apache Edgent and how it can work in conjunction with a centalized analytics system.  
 
 ![Water Conservation Application Architecture](readmeImg/water_arch1_edited.jpg)
 
 This system consists of two main analytics components:
 
-* Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Quarks. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
+* Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Edgent. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
 * Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Watson Insights for Weather API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
 
-For rapid application development, we leveraged other Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Quarks application to communicate with the IBM Streams application easily via MQTT.
+For rapid application development, we leveraged other Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Edgent application to communicate with the IBM Streams application easily via MQTT.
 
 To visualize the data, we implemented a visualization server using the SDK for Node.js service, and we used React.js to implement a web-based dashboard.
 
@@ -31,9 +31,9 @@ See the [Google+ Hangout Event](https://www.youtube.com/watch?v=Rvc1CqNJkOA) for
 
 ### Analytics on Edge Device
 
-The [moisture sensing simulator application](com.ibm.streamsx.smartsprinkler.quarks) is written using [Apache Quarks](http://quarks.incubator.apache.org).  The simulator can be run on any workstation.  It can also be run with a moisture sensor and buzzer on a Raspberry Pi.
+The [moisture sensing simulator application](com.ibm.streamsx.smartsprinkler.edgent) is written using [Apache Edgent](http://edgent.incubator.apache.org).  The simulator can be run on any workstation.  It can also be run with a moisture sensor and buzzer on a Raspberry Pi.
 
-*Apache Quarks is an effort undergoing Incubation at The Apache Software Foundation (ASF), sponsored by the Incubator.
+*Apache Edgent is an effort undergoing Incubation at The Apache Software Foundation (ASF), sponsored by the Incubator.
 
 ### Centalized Streaming Analytics System
 
@@ -51,8 +51,8 @@ An demonstration of the centralized analytics system is hosted here: [http://wat
 To try out this starter kit:
 
 1.  Deploy the centralized analyltics application onto Bluemix, following the instructions below. 
-2.  Follow instructions [here](com.ibm.streamsx.smartsprinkler.quarks/README.md) to set up device configuration file.
-2.  Download a copy of the Apache Quarks application from the [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases) page.  Run the application on your workstation or on a Raspberry Pi.
+2.  Follow instructions [here](com.ibm.streamsx.smartsprinkler.edgent/README.md) to set up device configuration file.
+2.  Download a copy of the Apache Edgent application from the [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases) page.  Run the application on your workstation or on a Raspberry Pi.
 
 ## Deploy to Bluemix
 
@@ -90,9 +90,9 @@ Then:
 
 By default, the server starts on localhost:3000
 
-## Running the Apache Quarks Application
+## Running the Apache Edgent Application
 
-Refer to [com.ibm.streamsx.smartsprinkler.quarks/README.md](com.ibm.streamsx.smartsprinkler.quarks/README.md) for further information.
+Refer to [com.ibm.streamsx.smartsprinkler.edgent/README.md](com.ibm.streamsx.smartsprinkler.edgent/README.md) for further information.
 
 # Project File Structure
 
@@ -107,7 +107,7 @@ root
 ├───readmeImg (Image files for README.md)
 ├───com.ibm.streamsx.smartsprinkler.iot (Streams project for connecting to IOT)
 ├───com.ibm.streamsx.smartsprinkler.streams (Streams project for making water decisions)
-├───com.ibm.streamsx.smartsprinkler.quarks (Java project for gathering sensor data on Raspberry Pi)
+├───com.ibm.streamsx.smartsprinkler.edgent (Java project for gathering sensor data on Raspberry Pi)
 └───nodejs (Node.js project for dashboard)
 ```
 
@@ -115,7 +115,7 @@ root
 
 The Java application running on Raspberry Pi require:
 * [Pi4J library](http://pi4j.com)
-* [Quarks library](http://quarks.incubator.apache.org/docs/community)
+* [Edgent library](http://edgent.incubator.apache.org/docs/community)
 
 The components required by the Node.js app are documented in the [package.json](nodejs/package.json) in the `nodejs` directory.  The list include:
 * async

@@ -1,4 +1,4 @@
-# Moisture Sensing Quarks Application
+# Moisture Sensing Edgent Application
 
 ## Overview
 
@@ -14,18 +14,18 @@ To download the device file, click the hamburger icon on the top left corner, an
 
 ## Running Simulation on your workstation
 
-1.  Download the smartsprinkler.quarks-x.x.x.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
-1.  Make sure device.cfg and the smartsprinkler.quarks-x.x.x.jar are in the same directory.
+1.  Download the smartsprinkler.edgent-x.x.x.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
+1.  Make sure device.cfg and the smartsprinkler.edgent-x.x.x.jar are in the same directory.
 1.  In the device.cfg file, set the `simulation` property to `true`.
-1.  Run the simulator using this command in the terminal:  `java -jar smartsprinkler.quarks-x.x.x.jar`
+1.  Run the simulator using this command in the terminal:  `java -jar smartsprinkler.edgent-x.x.x.jar`
 
 ## Running on your Raspberry Pi 2
 1.  Connect the digital output of moisture sensor to GPIO17
 1.  Connect the buzzer input to GPIO23
-1.  Download the smartsprinkler.quarks-x.x.x.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
+1.  Download the smartsprinkler.edgent-x.x.x.jar from the latest [release](https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases).
 1.  In the device.cfg file, set the `simulation` property to `false`.
-1.  Make sure device.cfg and the smartsprinkler.quarks-x.x.x.jar are in the same directory.
-1.  Run the simulator using this command in the terminal:  `sudo java -jar smartsprinkler.quarks-x.x.x.jar`
+1.  Make sure device.cfg and the smartsprinkler.edgent-x.x.x.jar are in the same directory.
+1.  Run the simulator using this command in the terminal:  `sudo java -jar smartsprinkler.edgent-x.x.x.jar`
 
 *What kind of moisture sensor did you use?*
 We got our moisture sensor from here:
@@ -33,10 +33,10 @@ We got our moisture sensor from here:
 
 Here's a tutorial on how to connect the sensor:  [Raspberry Pi Moisture Sensor Tutorial](http://www.modmypi.com/blog/raspberry-pi-plant-pot-moisture-sensor-with-email-notification-tutorial)
 
-## Developing the Quarks Application
+## Developing the Edgent Application
 
-1. Import the eclipse project in `com.ibm.streamsx.smartsprinkler.quarks`
-1. Download [Apache Quarks][1] and [Pi4J][2] libraries, and make the jar files available on your machine.  This project assumes they are installed in `/opt/quarks` and `/opt/pi4j` respectively.  If you installed the libraries in a different location, adjust the project build paths accordingly.
+1. Import the eclipse project in `com.ibm.streamsx.smartsprinkler.edgent`
+1. Download [Apache Edgent][1] and [Pi4J][2] libraries, and make the jar files available on your machine.  This project assumes they are installed in `/opt/edgent` and `/opt/pi4j` respectively.  If you installed the libraries in a different location, adjust the project build paths accordingly.
 1. Copy the device configuration file to the root of the project
 
 ### Running Your Project using Eclipse
@@ -60,9 +60,9 @@ Here's a tutorial on how to connect the sensor:  [Raspberry Pi Moisture Sensor T
 1. The dashboard should plot the moisture data received by the pi on the graph.
 
 # Links
-* Apache Quarks: http://quarks.incubator.apache.org
+* Apache Edgent: http://edgent.incubator.apache.org
 * Pi4J: http://pi4j.com
 * Pi4J Pin Numbering: http://pi4j.com/pins/model-b-rev2.html
 
-[1]: http://quarks.incubator.apache.org
+[1]: http://edgent.incubator.apache.org
 [2]: http://pi4j.com

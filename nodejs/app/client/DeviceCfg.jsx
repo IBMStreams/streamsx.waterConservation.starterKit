@@ -48,7 +48,7 @@ class DeviceCfg extends BaseComponent {
     const textarea = this.state.errmsg || this.state.devicecfg || 'Updating...';
     const disableButton = _.isEmpty(this.state.devicecfg);
     const appVersion = process.env.npm_package_version;
-    const quarkFn = `smartsprinkler.quarks-${appVersion}.jar`;
+    const quarkFn = `smartsprinkler.edgent-${appVersion}.jar`;
     const quarkUrl = `https://github.com/IBMStreams/streamsx.waterConservation.starterKit/releases/download/v${appVersion}/${quarkFn}`;
 
     return (
