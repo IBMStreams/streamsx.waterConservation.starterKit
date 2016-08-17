@@ -15,7 +15,6 @@ import java.util.concurrent.TimeUnit;
 import org.apache.edgent.connectors.iot.QoS;
 import org.apache.edgent.connectors.iotp.IotpDevice;
 import org.apache.edgent.providers.direct.DirectProvider;
-import org.apache.edgent.topology.TSink;
 import org.apache.edgent.topology.TStream;
 import org.apache.edgent.topology.TWindow;
 import org.apache.edgent.topology.Topology;
@@ -71,7 +70,7 @@ public class SmartSprinklerApp {
 		// Send sensor reading to dashboard
 		// This is done so that we can visualize the data.
 		// In reality, this is not needed
-		TSink<Reading> httpPost = avg.sink(avgMoisture -> {
+		avg.sink(avgMoisture -> {
 			PostReading sink = new PostReading(devicecfg.getUIHostURL() + "/api/streams/sensorreading");
 			
 			sink.post(avgMoisture);

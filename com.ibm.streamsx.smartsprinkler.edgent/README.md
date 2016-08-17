@@ -36,7 +36,7 @@ Here's a tutorial on how to connect the sensor:  [Raspberry Pi Moisture Sensor T
 ## Developing the Edgent Application
 
 1. Import the eclipse project in `com.ibm.streamsx.smartsprinkler.edgent`
-1. Download [Apache Edgent][1] and [Pi4J][2] libraries, and make the jar files available on your machine.  This project assumes they are installed in `/opt/edgent` and `/opt/pi4j` respectively.  If you installed the libraries in a different location, adjust the project build paths accordingly.
+1. Download [Apache Edgent][1] and [Pi4J][2] libraries, and make the jar files available on your machine.  Configure the classpath variables EDGENT and PI4J to the location of the libraries.  For example, set EDGENT and PI4J to `/opt/edgent/java8` and `/opt/pi4j` respectively.
 1. Copy the device configuration file to the root of the project
 
 ### Running Your Project using Eclipse
