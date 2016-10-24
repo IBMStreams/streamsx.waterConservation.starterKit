@@ -119,6 +119,10 @@ function removeRunningJobs(credential, apps, status, cb) {
 }
 
 function submitJob(credential, apps, cb) {
+  let jobStatus = {
+    job_count: 0,
+    jobs: []
+  };
   async.each(apps, function(app, callback) {
     logger.info(
       'Using the Streaming Analytics REST API to submit an application bundle: ' +
@@ -126,6 +130,7 @@ function submitJob(credential, apps, cb) {
 
     request.post({
       url: getStreamsApiUrl(credential, 'jobs_path', { bundle_id: path.basename(app.file) }),
+      json: true,
       formData: {
         file: fs.createReadStream(app.file),
         config: {
@@ -137,10 +142,16 @@ function submitJob(credential, apps, cb) {
       }
     }, function (err, resp, body) {
       err = handleRequestError(err, resp, HttpStatus.OK);
+      jobStatus.job_count += 1;
+      jobStatus.jobs.push({
+        jobId: body.jobId,
+        application: path.basename(app.file),
+        health: 'just started'
+      });
       callback(err, body);
     });
   }, function (err) {
-    cb(err);
+    cb(err, jobStatus);
   });
 }
 
@@ -169,6 +180,20 @@ function deploysab (credential, apps, done) {
   });
 }
 
+function stopJobs (credential, apps, done) {
+  async.waterfall([
+    async.apply(startInstance, credential),
+    async.apply(removeRunningJobs, credential, apps)
+  ], function (err) {
+    if (!err) {
+      logger.info('Application bundle(s) successfully stopped');
+    }
+    if (done) {
+      done(err);
+    }
+  });
+}
+
 function getRunningJobs (credential, done) {
   request.get({
     url: getStreamsApiUrl(credential, 'jobs_path'),
@@ -181,5 +206,6 @@ function getRunningJobs (credential, done) {
 
 module.exports = {
   deploysab: deploysab,
+  stopJobs: stopJobs,
   getRunningJobs: getRunningJobs
 };
