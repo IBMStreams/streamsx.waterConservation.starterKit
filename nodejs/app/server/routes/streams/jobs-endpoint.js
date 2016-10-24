@@ -17,6 +17,7 @@ const streams = require.main.require('./app/server/common/streams-api');
 const utils = require.main.require('./app/server/common/utils');
 const logger = require.main.require('./app/server/common/logger');
 
+// Get Jobs that are currently running
 endpt.get('/', function(req, res, next) {
   streams.getRunningJobs(config.streaming_analytics, function (err, status) {
     if (err) {
@@ -24,6 +25,28 @@ endpt.get('/', function(req, res, next) {
     }
 
     res.send(status);
+  });
+});
+
+// Submit SABs to Streaming Analytics service
+endpt.post('/', function(req, res, next) {
+  streams.deploysab(config.streaming_analytics, config.streaming_app, function (err, status) {
+    if (err) {
+      return next(err);
+    }
+
+    res.send(status);
+  });
+});
+
+// Delete all jobs that are currently running
+endpt.delete('/', function(req, res, next) {
+  streams.stopJobs(config.streaming_analytics, config.streaming_app, function (err, status) {
+    if (err) {
+      return next(err);
+    }
+
+    res.sendStatus(HttpStatus.NO_CONTENT);
   });
 });
 

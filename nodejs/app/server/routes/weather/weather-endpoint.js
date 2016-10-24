@@ -42,7 +42,7 @@ function weatherAPI(path, queries, cb) {
 }
 
 // Keep track of results so we don't call the weather API more than once a day
-var last_daily_result = null;
+var last_daily_result = require('./weather-template.data').forecast;
 var last_retrieved_time = null;
 var simulation_status = {
   enable: false,
@@ -55,12 +55,9 @@ const max_qpf = 5.0;
 // https://twcservice.mybluemix.net/rest-api/
 function getRealWeatherDaily(query, cb) {
   const datefmt = 'MM-DD';
-  if (!last_retrieved_time) {
-    last_retrieved_time = moment().format(datefmt);
-  }
   const now = moment().format(datefmt);
 
-  if (last_retrieved_time !== now || !last_daily_result) {
+  if (last_retrieved_time !== now) {
     const weatherurl = '/api/weather/v1/geocode' +
       '/' + markham_geocode_latitude +
       '/' + markham_geocode_longitude +
@@ -71,16 +68,19 @@ function getRealWeatherDaily(query, cb) {
       language: query.language || 'en'
     }, function(err, result) {
       if (err) {
-        return cb(err);
+        logger.error(err, 'Error from weather API.');
+        return cb(null, last_daily_result);
       }
 
       if (!result || !result.forecasts || result.forecasts.length === 0) {
-        const errmsg = 'Mal-formed Forecast data retrieved.';
-        logger.error({weather: result}, 'Mal-formed Forecast data retrieved.');
-        return cb(new Error(errmsg));
+        logger.error({
+          weatherdata: result
+        }, 'Mal-formed Forecast data retrieved.');
+        return cb(null, last_daily_result);
       }
 
       last_daily_result = _.cloneDeep(result);
+      last_retrieved_time = now;
       return cb(null, last_daily_result);
     });
   } else {
