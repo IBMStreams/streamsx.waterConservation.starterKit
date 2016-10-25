@@ -119,7 +119,7 @@ function removeRunningJobs(credential, apps, status, cb) {
 }
 
 function submitJob(credential, apps, cb) {
-  let jobStatus = {
+  var jobStatus = {
     job_count: 0,
     jobs: []
   };
