@@ -10,7 +10,7 @@ To improve irrigation efficiency and properly enforce water usage restrictions, 
 
 ### Water Conservation Application Architecture
 
-The starter kit demonstrates the reference architecture of using Apache Edgent and how it can work in conjunction with a centalized analytics system.  
+The starter kit demonstrates the reference architecture of using Apache Edgent and how it can work in conjunction with a centralized analytics system.  
 
 ![Water Conservation Application Architecture](readmeImg/water_arch1_edited.jpg)
 
@@ -26,6 +26,8 @@ To visualize the data, we implemented a visualization server using the SDK for N
 This smart sprinkler system now enables more efficient water irrigation based on current soil conditions. The prototype only takes the moisture level into account, but the system could be extended to monitor and analyze other important factors like moisture evaporation rate, soil mineral content, or irrigation requirements based on the type of vegetation being planted. Controlling the sprinklers in a centralized manner enabled us to implement business rules for managing water resources and properly enforcing water restrictions when necessary.
 
 See the [Google+ Hangout Event](https://www.youtube.com/watch?v=Rvc1CqNJkOA) for more detail.
+
+**NOTE:** The jobs in the centralized streaming analytics system are configured to run for one hour only. You can start or stop the jobs manually under the 'Settings' menu.
 
 ## Services Used in this Starter Kit
 
