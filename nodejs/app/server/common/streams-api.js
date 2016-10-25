@@ -17,6 +17,9 @@ const fs = require('fs');
 
 const logger = require.main.require('./app/server/common/logger');
 
+// timeout variable
+var timeoutVar = null;
+
 // getStreamsAPI() expects the credential to have the following fields:
 // {
 //   "rest_host": "xxx",
@@ -94,11 +97,15 @@ function startInstance(credential, cb) {
   });
 }
 
-function removeRunningJobs(credential, apps, status, cb) {
+function exitIfInstanceNotStarted(status, cb) {
   if (status.state !== 'STARTED') {
     return cb(new Error('Streams Instance not started'), null);
   }
 
+  cb(null, status);
+}
+
+function removeRunningJobs(credential, apps, status, cb) {
   async.each(status.jobs, function(job, callback) {
     if (!_.some(apps, { 'name': job.application })) {
       // Not the same application, don't delete
@@ -168,6 +175,7 @@ function submitJob(credential, apps, cb) {
 function deploysab (credential, apps, done) {
   async.waterfall([
     async.apply(startInstance, credential),
+    async.apply(exitIfInstanceNotStarted),
     async.apply(removeRunningJobs, credential, apps),
     async.apply(submitJob, credential, apps)
   ], function (err, result) {
@@ -175,21 +183,11 @@ function deploysab (credential, apps, done) {
       logger.info('Application bundle(s) successfully submitted');
     }
     if (done) {
-      done(err, result);
-    }
-  });
-}
+      // Set a countdown timer, so the jobs will stop automatically after an
+      // hour
+      timeoutVar = setTimeout(stopJobs, 3600000, credential, apps, null);
 
-function stopJobs (credential, apps, done) {
-  async.waterfall([
-    async.apply(startInstance, credential),
-    async.apply(removeRunningJobs, credential, apps)
-  ], function (err) {
-    if (!err) {
-      logger.info('Application bundle(s) successfully stopped');
-    }
-    if (done) {
-      done(err);
+      done(err, result);
     }
   });
 }
@@ -201,6 +199,25 @@ function getRunningJobs (credential, done) {
   }, function (err, resp, body) {
     err = handleRequestError(err, resp, HttpStatus.OK);
     done(err, body);
+  });
+}
+
+function stopJobs (credential, apps, done) {
+  if (timeoutVar) {
+    clearTimeout(timeoutVar);
+    timeoutVar = null;
+  }
+
+  async.waterfall([
+    async.apply(getRunningJobs, credential),
+    async.apply(removeRunningJobs, credential, apps)
+  ], function (err) {
+    if (!err) {
+      logger.info('Application bundle(s) successfully stopped');
+    }
+    if (done) {
+      done(err);
+    }
   });
 }
 

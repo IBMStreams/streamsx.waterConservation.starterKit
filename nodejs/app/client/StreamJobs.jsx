@@ -33,58 +33,35 @@ class StreamJobs extends BaseComponent {
   }
 
   refreshJobStatus() {
-    const self = this;
-    self.setState({
-      disableActions: true,
-      jobStatus: {}
-    });
     request.get('/api/streams/jobs')
-      .set('Accept', 'application/json')
-      .end(function(err, res) {
-        if (!err && !_.isEmpty(res.body)) {
-          self.setState({
-            disableActions: false,
-            jobStatus: res.body
-          });
-        }
-      });
+      .end(null);
   }
 
   stopJobs() {
-    const self = this;
-    self.setState({
-      disableActions: true,
-    });
     request.delete('/api/streams/jobs')
-      .set('Accept', 'application/json')
-      .end(function(err, res) {
-        if (!err) {
-          self.setState({
-            disableActions: false,
-            jobStatus: {}
-          });
-        }
-      });
+      .end(null);
   }
 
   submitJobs() {
-    const self = this;
-    self.setState({
-      disableActions: true,
-    });
     request.post('/api/streams/jobs')
-      .set('Accept', 'application/json')
-      .end(function(err, res) {
-        if (!err && !_.isEmpty(res.body)) {
-          self.setState({
-            disableActions: false,
-            jobStatus: res.body
-          });
-        }
-      });
+      .end(null);
   }
 
   componentDidMount() {
+    const self = this;
+    this.socket = io();
+    this.socket.on('streamjobs', function(status) {
+      if (status == null) {
+        self.setState({
+          disableActions: true
+        });
+      } else {
+        self.setState({
+          disableActions: false,
+          jobStatus: status
+        });
+      }
+    });
     this.refreshJobStatus();
   }
 

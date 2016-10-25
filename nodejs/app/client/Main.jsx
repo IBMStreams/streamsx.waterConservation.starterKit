@@ -20,14 +20,24 @@ import Settings from './Settings';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import AppTheme from './style/theme';
 
+import {red500, yellow200, greenA200} from 'material-ui/lib/styles/colors';
+import IconButton from 'material-ui/lib/icon-button';
+import MoodGood from 'material-ui/lib/svg-icons/social/mood';
+import MoodBad from 'material-ui/lib/svg-icons/social/mood-bad';
+import CircularProgress from 'material-ui/lib/circular-progress';
+
+const _ = require('lodash');
+const request = require('superagent');
+
 class Main extends BaseComponent {
   constructor(props, context) {
     super(props, context);
-    this._bind('handleMenuTap', 'handleMenuClose', 'getChildContext');
+    this._bind('handleMenuTap', 'handleMenuClose', 'getChildContext', 'refreshJobStatus', 'componentDidMount');
 
     this.state = {
       menu_open: false,
-      current_menu: 'dashboard'
+      current_menu: 'dashboard',
+      sab_status: null
     };
   }
 
@@ -49,6 +59,61 @@ class Main extends BaseComponent {
     }
   }
 
+  refreshJobStatus() {
+    request.get('/api/streams/jobs')
+      .end(null);
+  }
+
+  componentDidMount() {
+    const self = this;
+    this.socket = io();
+    this.socket.on('streamjobs', function(status) {
+      if (status == null) {
+        self.setState({
+          sab_status: (
+            <CircularProgress color={yellow200} size={0.3} />
+          )
+        });
+      } else if (status.jobs && status.jobs.length >= 4) {
+        if (_.every(status.jobs, { 'health': 'healthy' })) {
+          self.setState({
+            sab_status: (
+              <IconButton
+                tooltip="Streams Jobs Healthy. You are good to go!"
+                tooltipPosition="bottom-left"
+                onMouseDown={self.refreshJobStatus}>
+                <MoodGood color={greenA200} />
+              </IconButton>
+            )
+          });
+        } else {
+          self.setState({
+            sab_status: (
+              <IconButton
+                tooltip="Streams Jobs Initializing. Click to refresh status"
+                tooltipPosition="bottom-left"
+                onMouseDown={self.refreshJobStatus}>
+                <MoodGood color={yellow200} />
+              </IconButton>
+            )
+          });
+        }
+      } else {
+        self.setState({
+          sab_status: (
+            <IconButton
+              tooltip="Streams Jobs Not Healthy. Go to Settings for more detail."
+              tooltipPosition="bottom-left"
+              onMouseDown={self.refreshJobStatus}>
+              <MoodBad color={red500} />
+            </IconButton>
+          )
+        });
+      }
+    });
+    this.refreshJobStatus();
+  }
+
   render() {
     let bodyElement = <Dashboard />;
     if (this.state.current_menu === 'settings') {
@@ -59,6 +124,7 @@ class Main extends BaseComponent {
       <div>
         <AppBar
           title={`Water Conservation v${process.env.npm_package_version}`} onLeftIconButtonTouchTap={this.handleMenuTap}
+          iconElementRight={this.state.sab_status}
         />
         <LeftNav
           docked={false}
