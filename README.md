@@ -1,4 +1,4 @@
-# streamsx.waterConservation.starterKit   [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy/index.html?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
+# streamsx.waterConservation.starterKit   [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](undefined?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ## Overview
 
@@ -68,7 +68,7 @@ Click the button below to fork into IBM DevOps Services and deploy your own copy
 
 We are deploying a number of applications onto Bluemix.  This process will take about 15 minutes to complete.
 
-[![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy/index.html?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
+[![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](undefined?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ### Option 2: Manual Deployment
 
