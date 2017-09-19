@@ -18,7 +18,7 @@ applications:
   disk_quota: 1024M
   buildpack: sdk-for-nodejs
   description: The Water Conservation App
-  domain: stage1.mybluemix.net
+  domain: mybluemix.net
   path: nodejs
   command: npm start
   instances: 1
