@@ -13,13 +13,3 @@ applications:
   instances: 1
   memory: 512M
 
-declared-services:
-  Weather-Company-Data:
-    label: weatherinsights
-    plan: Free-v2
-  Streaming-Analytics:
-    label: streaming-analytics
-    plan: Standard
-  Internet-of-Things-Platform:
-    label: iotf-service
-    plan: iotf-service-free

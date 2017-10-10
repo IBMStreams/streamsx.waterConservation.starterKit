@@ -44,6 +44,12 @@ stages:
       application: ${CF_APP}
     script: |-
       #!/bin/bash
+      
+      # setup services used by this app
+      cf create-service weatherinsights Free-v2 Weather-Company-Data
+      cf create-service streaming-analytics Standard Streaming-Analytics
+      cf create-service iotf-service iotf-service-free Internet-of-Things-Platform
+      
       cf push "${CF_APP}"
       export CF_APP_NAME="$CF_APP"
       # View logs
