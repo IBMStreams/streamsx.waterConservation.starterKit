@@ -47,7 +47,7 @@ stages:
       
       # setup services used by this app
       cf create-service weatherinsights Free-v2 Weather-Company-Data
-      cf create-service streaming-analytics Standard Streaming-Analytics
+      cf create-service streaming-analytics lite Streaming-Analytics
       cf create-service iotf-service iotf-service-free Internet-of-Things-Platform
       
       cf push "${CF_APP}"
