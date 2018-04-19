@@ -1,4 +1,4 @@
-# streamsx.waterConservation.starterKit   [![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/natashadsilva/streamsx.waterConservation.starterKit.git)
+# streamsx.waterConservation.starterKit   [![Deploy To IBM Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ## Overview
 
@@ -19,7 +19,7 @@ This system consists of two main analytics components:
 * Analytics on edge devices: We used a Raspberry Pi to simulate a smart sprinkler device. On the device, local soil conditions like moisture level are continuously collected and analyzed using Apache Edgent. When the device detects that the soil is too dry and requires watering, it sends a request to the centralized analytics system for permission to turn on the sprinkler. The smart sprinkler system will not turn on the sprinkler unless it is approved by the centralized analytics system.
 * Centralized streaming analytics system: In the centralized analytics system, we used the Streaming Analytics service to analyze the incoming water requests in real time. To approve a water request, the application checks the weather forecast for the next two days using the Weather Company Data API. If there is not enough precipitation in the forecast, it checks to see if a water ban is currently in effect. The Streams application will approve the water request only if there is not enough precipitation in the forecast and if there is no water ban in effect.
 
-For rapid application development, we leveraged other Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Edgent application to communicate with the IBM Streams application easily via MQTT.
+For rapid application development, we leveraged other IBM Bluemix services. These services handle the infrastructure and connectivity, allowing us to focus on developing the analytics and business logic of the application. For the device to communicate with the centralized analytics system, we used the Watson Internet of Things Platform. This service handles application connectivity for us, allowing the Apache Edgent application to communicate with the IBM Streams application easily via MQTT.
 
 To visualize the data, we implemented a visualization server using the SDK for Node.js service, and we used React.js to implement a web-based dashboard.
 
@@ -68,7 +68,7 @@ Click the button below to fork into IBM DevOps Services and deploy your own copy
 
 We are deploying a number of applications onto Bluemix.  This process will take about 15 minutes to complete.
 
-[![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/natashadsilva/streamsx.waterConservation.starterKit.git)
+[![Deploy To Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
 
 ### Option 2: Manual Deployment
 
