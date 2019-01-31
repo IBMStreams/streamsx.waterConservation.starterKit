@@ -33,13 +33,10 @@ endpt.get('/devicecfg', function(req, res, next) {
 
     // Construct device File
      var cfg = '[device]';
-    //_.forEach(device_config, function(value, key) {
-      cfg += 'org=my_org\n';
-      cfg += 'id=iot_device_123\n';
-      cfg += 'type=my_iot_device\n';
-      cfg += 'auth-method=token\n';
-      cfg += 'auth-token=abcdef\n';
-    //});
+     _.forEach(device_config, function(value, key) {
+      cfg += '\n' + key + ' = ' + value;
+    });
+    
     cfg += '\nui-host = ' + config.server.ui_host;
     cfg += '\nsimulation = true';
 
