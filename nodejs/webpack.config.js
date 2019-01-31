@@ -3,7 +3,7 @@
 /* This is an automatically generated copyright prolog.             */
 /* After initializing,  DO NOT MODIFY OR MOVE                       */
 /* **************************************************************** */
-/* (C) Copyright IBM Corp.  2016, 2016                              */
+/* (C) Copyright IBM Corp.  2016, 2019                              */
 /* All Rights Reserved.                                             */
 /* **************************************************************** */
 /* end_generated_IBM_copyright_prolog                               */
@@ -27,22 +27,23 @@ var config = {
     publicPath: '/build/'
   },
   resolve: {
-    extensions: ['', '.js', '.jsx']
+    extensions: ['.js', '.jsx']
   },
   module: {
-    preLoaders: [
+    rules: [
       {
         //Eslint loader
         test: /\.jsx?$/,
         loader: 'eslint-loader',
         include: [mainPath],
+        enforce: "pre",
         exclude: [nodeModulesPath]
       }
     ],
-    loaders: [
+    rules: [
       {
         test: /\.jsx?$/,
-        loader: 'babel',
+        loader: 'babel-loader',
         exclude: [nodeModulesPath]
       },
       {
