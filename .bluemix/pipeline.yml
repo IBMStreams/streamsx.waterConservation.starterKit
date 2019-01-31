@@ -16,7 +16,7 @@ stages:
       # To use Node.js 0.12.7, uncomment the following line:
       #export PATH=/opt/IBM/node-v0.12/bin:$PATH
       # To use Node.js 4.2.2, uncomment the following line:
-      export PATH=/opt/IBM/node-v4.2/bin:$PATH
+      export PATH=/opt/IBM/node-v6.2.2/bin:$PATH
       cd nodejs
       npm install
       npm run build
