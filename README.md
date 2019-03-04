@@ -50,6 +50,12 @@ An demonstration of the centralized analytics system is hosted here: [http://wat
 
 ## Getting Started
 
+
+# March 2019: Temporarily unavailable
+
+## Due to changes in the IBM Cloud platform API and services, attempts to deploy this application will not be successful.  But you can still create the services you need to develop with Streams and IoT devices by [following the steps on Streamsdev](https://developer.ibm.com/streamsdev/docs/setup-instructions-connecting-edgent-streams-applications-watson-iot-platform/).
+
+
 To try out this starter kit:
 
 1.  Deploy the centralized analyltics application onto Bluemix, following the instructions below.
