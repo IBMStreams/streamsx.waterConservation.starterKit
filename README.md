@@ -1,4 +1,10 @@
-# streamsx.waterConservation.starterKit   [![Deploy To IBM Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/deploy?repository=https://github.com/IBMStreams/streamsx.waterConservation.starterKit.git)
+# streamsx.waterConservation.starterKit   
+
+# Notice
+
+**This starter kit can no longer be deployed since the [Weather Company service is no longer available on IBM Cloud](https://www.ibm.com/cloud/blog/announcements/important-changes-related-to-weather-company-data-for-ibm-cloud).** 
+
+You can still modify the code and use its architecture as a reference.
 
 ## Overview
 
@@ -49,11 +55,6 @@ The centralized streaming analytics system uses the following Bluemix services:
 An demonstration of the centralized analytics system is hosted here: [http://waterconservation.mybluemix.net/](http://waterconservation.mybluemix.net/).
 
 ## Getting Started
-
-
-# March 2019: Temporarily unavailable
-
-## Due to changes in the IBM Cloud platform API and services, attempts to deploy this application will not be successful.  But you can still create the services you need to develop with Streams and IoT devices by [following the steps on Streamsdev](https://developer.ibm.com/streamsdev/docs/setup-instructions-connecting-edgent-streams-applications-watson-iot-platform/).
 
 
 To try out this starter kit:
