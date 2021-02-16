@@ -2,7 +2,9 @@
 
 # Notice
 
-**This starter kit can no longer be deployed since the [Weather Company service is no longer available on IBM Cloud](https://www.ibm.com/cloud/blog/announcements/important-changes-related-to-weather-company-data-for-ibm-cloud).** 
+
+## **This starter kit can no longer be deployed since the [Weather Company service is no longer available on IBM Cloud](https://www.ibm.com/cloud/blog/announcements/important-changes-related-to-weather-company-data-for-ibm-cloud).** 
+
 
 You can still modify the code and use its architecture as a reference.
 
